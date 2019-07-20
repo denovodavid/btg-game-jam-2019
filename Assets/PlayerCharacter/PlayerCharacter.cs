@@ -4,7 +4,10 @@ public class PlayerCharacter : MonoBehaviour
 {
     public float speed = 0.05f;
     public SpriteRenderer boat;
+    public GameObject bucket;
+    public ParticleSystem bucketParticles;
     Bounds boatBounds;
+    bool holdingBucket = false;
 
     private void Start()
     {
@@ -14,6 +17,7 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Update()
     {
+        // move left
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             var newPos = transform.position + Vector3.left * speed;
@@ -24,6 +28,8 @@ public class PlayerCharacter : MonoBehaviour
             }
             GetComponent<SpriteRenderer>().flipX = true;
         }
+
+        // move right
         if (Input.GetKey(KeyCode.RightArrow))
         {
             var newPos = transform.position + Vector3.right * speed;
@@ -35,14 +41,35 @@ public class PlayerCharacter : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = false;
         }
 
-        // snap position
+        // pick up
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (holdingBucket)
+            {
+                Debug.Log("Drop Bucket");
+                bucket.transform.SetParent(null);
+                holdingBucket = false;
+            }
+            else if (GetComponent<BoxCollider2D>().OverlapPoint(bucket.transform.position))
+            {
+                Debug.Log("Pick up Bucket");
+                bucket.transform.SetParent(transform);
+                holdingBucket = true;
+            }
+        }
 
-        float gridScale = 24f;
-        var currentPos = transform.position;
-        transform.position = new Vector3(
-            Mathf.Round(currentPos.x * gridScale) / gridScale,
-            Mathf.Round(currentPos.y * gridScale) / gridScale,
-            Mathf.Round(currentPos.z * gridScale) / gridScale
-        );
+        // interact
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (holdingBucket)
+            {
+                Debug.Log("Use Bucket");
+                if (GameManager.instance.boatWaterLevel > 0)
+                {
+                    GameManager.instance.boatWaterLevel -= 5f;
+                    bucketParticles.Play();
+                }
+            }
+        }
     }
 }
