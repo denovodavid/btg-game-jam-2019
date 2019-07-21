@@ -14,6 +14,8 @@ public class PlayerCharacter : MonoBehaviour
     Animator animator;
     bool dead = false;
     bool bucketReady = true;
+    public AudioClip bucketSplash;
+    public AudioClip bucketSFX;
 
     private void Awake()
     {
@@ -34,7 +36,7 @@ public class PlayerCharacter : MonoBehaviour
         // move left
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            var newPos = transform.position + Vector3.left * localSpeed;
+            var newPos = transform.position + Vector3.left * localSpeed * Time.deltaTime * 70;
             var closestPoint = boatBounds.ClosestPoint(newPos);
             if (Mathf.Approximately(closestPoint.x, newPos.x))
             {
@@ -46,7 +48,7 @@ public class PlayerCharacter : MonoBehaviour
         // move right
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            var newPos = transform.position + Vector3.right * localSpeed;
+            var newPos = transform.position + Vector3.right * localSpeed * Time.deltaTime * 70;
             var closestPoint = boatBounds.ClosestPoint(newPos);
             if (Mathf.Approximately(closestPoint.x, newPos.x))
             {
@@ -56,34 +58,34 @@ public class PlayerCharacter : MonoBehaviour
         }
 
         // pick up
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (holdingBucket)
             {
                 Debug.Log("Drop Bucket");
                 bucket.transform.SetParent(null);
                 holdingBucket = false;
+                GetComponent<AudioSource>().clip = bucketSFX;
+                GetComponent<AudioSource>().Play();
             }
             else if (GetComponent<BoxCollider2D>().OverlapPoint(bucket.transform.position))
             {
                 Debug.Log("Pick up Bucket");
                 bucket.transform.SetParent(transform);
                 holdingBucket = true;
+                GetComponent<AudioSource>().clip = bucketSFX;
+                GetComponent<AudioSource>().Play();
             }
             else if (GetComponent<BoxCollider2D>().OverlapPoint(reefer.transform.position))
             {
                 Debug.Log("Reef Sails");
-                boat.sailIsReefed = !boat.sailIsReefed;
+                boat.ToggleSails();
             }
         }
 
-        // interact
-        if (Input.GetKey(KeyCode.X))
+        if (holdingBucket)
         {
-            if (holdingBucket)
-            {
-                StartCoroutine(UseBucket());
-            }
+            StartCoroutine(UseBucket());
         }
     }
 
@@ -105,6 +107,8 @@ public class PlayerCharacter : MonoBehaviour
         {
             GameManager.instance.boatWaterLevel -= 5f;
             bucketParticles.Play();
+            GetComponent<AudioSource>().clip = bucketSplash;
+            GetComponent<AudioSource>().Play();
             bucketReady = false;
             yield return new WaitForSeconds(1f);
             bucketReady = true;

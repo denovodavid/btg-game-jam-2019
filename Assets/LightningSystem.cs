@@ -10,6 +10,7 @@ public class LightningSystem : MonoBehaviour
     public GameUI gameUI;
     public float yValue = -0.5f;
     public float zValue = -7f;
+    public AudioClip lightningSFX;
 
     public void Strike()
     {
@@ -30,6 +31,8 @@ public class LightningSystem : MonoBehaviour
         var lightning = Instantiate(lightningPrefab, strikePos, Quaternion.identity, transform);
         theCamera.Impact();
         gameUI.ScreenFlash();
+        GetComponent<AudioSource>().clip = lightningSFX;
+        GetComponent<AudioSource>().Play();
         // kill player
         var results = new Collider2D[8];
         var resultNum = Physics2D.OverlapBoxNonAlloc(strikePos, Vector2.one, 0, results);

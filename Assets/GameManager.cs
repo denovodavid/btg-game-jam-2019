@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public PlayerCharacter playerCharacter;
     public Boat boat;
     public bool win = false;
+    public bool gameOver = false;
     public float waterSpeed = 0.03f;
     public float windSpeed = 0f;
     public float reefWindSpeed = 70f;
@@ -27,6 +28,19 @@ public class GameManager : MonoBehaviour
     public float windSpeed01 { get => windSpeed / maxWindSpeed; }
     public bool shouldReefSails { get => windSpeed >= reefWindSpeed; }
     public float levelProgress01 { get => (float)(director.time / director.duration); }
+    public AudioSource sfxSource;
+    public AudioClip oceanSFX;
+    public AudioSource musicSource;
+    public AudioClip intro;
+    public AudioClip shanty;
+    public AudioClip winTheme;
+    bool introPlayed = false;
+
+    private void Awake()
+    {
+        sfxSource.clip = oceanSFX;
+        sfxSource.Play();
+    }
 
     private void Update()
     {
@@ -45,18 +59,42 @@ public class GameManager : MonoBehaviour
         {
             Win();
         }
+
+        sfxSource.volume = windSpeed01 + 0.1f;
+        musicSource.pitch = boat.boatSpeed01 * 0.5f + 0.5f;
+        if (!gameOver && !win && !musicSource.isPlaying && boat.boatSpeed01 >= 1)
+        {
+            if (!introPlayed)
+            {
+                musicSource.clip = intro;
+                musicSource.loop = false;
+                introPlayed = true;
+            }
+            else
+            {
+                musicSource.clip = shanty;
+                musicSource.loop = true;
+            }
+            musicSource.Play();
+        }
     }
 
     public void Win()
     {
         Debug.Log("WIN!");
         win = true;
+        musicSource.Stop();
+        musicSource.loop = false;
+        musicSource.clip = winTheme;
+        musicSource.Play();
         gameUI.Win();
         StartCoroutine(ReturnToMenu());
     }
 
     public void GameOver()
     {
+        gameOver = true;
+        if (musicSource.isPlaying) musicSource.Stop();
         playerCharacter.Die();
         director.Pause();
         waterSpeed = 0f;
@@ -67,6 +105,7 @@ public class GameManager : MonoBehaviour
     IEnumerator ReturnToMenu()
     {
         yield return new WaitForSeconds(10);
+        sfxSource.Stop();
         SceneManager.LoadScene(0);
     }
 }

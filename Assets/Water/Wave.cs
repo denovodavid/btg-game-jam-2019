@@ -14,6 +14,7 @@ public class Wave : MonoBehaviour
         if (other.name.Equals("Boat"))
         {
             GameManager.instance.boatWaterLevel += waveDamage;
+            GetComponent<AudioSource>().Play();
             goingDown = true;
             Debug.Log("WAVE HIT");
         }
