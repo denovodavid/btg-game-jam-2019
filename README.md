@@ -1,8 +1,10 @@
-# BTG Semester Break Game Jam 2019
+# [BTG Semester Break Game Jam 2019](https://itch.io/jam/btgjam19)
 
-> Tagline
+> Theme: **Brave the Elements**
 
-Game summary.
+## Cloudburst
+
+_I'm afraid of the ocean. Sail a boat through a storm._
 
 ## Developing
 
