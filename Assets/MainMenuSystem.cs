@@ -18,6 +18,8 @@ public class MainMenuSystem : ScriptableObject
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_WEBGL
+        // Do not allow quit from web player.
 #else
         Application.Quit();
 #endif
