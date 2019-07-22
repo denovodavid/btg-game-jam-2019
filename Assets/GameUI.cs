@@ -14,6 +14,7 @@ public class GameUI : MonoBehaviour
     public Slider levelProgress;
     public Animator winAnimator;
     public TMPro.TextMeshProUGUI speedText;
+    public TMPro.TextMeshProUGUI speedTextShadow;
 
     private void Update()
     {
@@ -23,6 +24,7 @@ public class GameUI : MonoBehaviour
         windWarning.SetActive(GameManager.instance.shouldReefSails);
         levelProgress.value = GameManager.instance.levelProgress01;
         speedText.SetText(boat.boatSpeed.ToString("#") + " km/h");
+        speedTextShadow.SetText(boat.boatSpeed.ToString("#") + " km/h");
     }
 
     public void Win()
