@@ -53,7 +53,10 @@ public class GameManager : MonoBehaviour
             GameOver();
         }
 
-        director.playableGraph.GetRootPlayable(0).SetSpeed(boat.boatSpeed01);
+        if (director.playableGraph.IsValid())
+        {
+            director.playableGraph.GetRootPlayable(0).SetSpeed(boat.boatSpeed01);
+        }
 
         if (!win && director.time >= director.duration)
         {
