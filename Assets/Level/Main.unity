@@ -7332,6 +7332,10 @@ PrefabInstance:
       propertyPath: boat
       value: 
       objectReference: {fileID: 447708824}
+    - target: {fileID: 1736265819, guid: 01b27d6ca13c28242bf0761f4cbf73ab, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 3221225472
+      objectReference: {fileID: 0}
     - target: {fileID: 1869257114, guid: 01b27d6ca13c28242bf0761f4cbf73ab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
