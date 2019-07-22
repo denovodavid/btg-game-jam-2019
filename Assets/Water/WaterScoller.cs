@@ -17,7 +17,7 @@ public class WaterScoller : MonoBehaviour
 
     private void Update()
     {
-        waters.Translate(Vector3.left * GameManager.instance.waterSpeed);
+        waters.Translate(Vector3.left * GameManager.instance.waterSpeed * Time.deltaTime * 70);
         if (waters.localPosition.x < 0)
         {
             waters.localPosition = new Vector3(width, 0, 0);
