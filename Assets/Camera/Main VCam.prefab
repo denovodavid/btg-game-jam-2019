@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5001114017149845117}
   - component: {fileID: 4406781334241965883}
   - component: {fileID: 5469722612514349970}
-  - component: {fileID: 1724001760}
   - component: {fileID: 1724001759}
   - component: {fileID: 2042440683058167431}
   - component: {fileID: 6143027604309395526}
@@ -104,21 +103,6 @@ MonoBehaviour:
   m_ChannelMask: 1
   m_Gain: 1
   m_Use2DDistance: 0
---- !u!114 &1724001760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3211932312666958536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FocusTracksTarget: 0
-  m_FocusOffset: 0
-  m_Profile: {fileID: 11400000, guid: 680922c45b9bfe14085ea8a49e7d23dd, type: 2}
 --- !u!95 &1724001759
 Animator:
   serializedVersion: 3
@@ -150,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30c4d36e0eb9304cb8d37585b7daaf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  postProcessVolume: {fileID: 0}
 --- !u!114 &6143027604309395526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
-    m_RawSignal: {fileID: 0}
+    m_RawSignal: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
     m_AmplitudeGain: 1
     m_FrequencyGain: 1
     m_RepeatMode: 0
@@ -289,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  m_NoiseProfile: {fileID: 11400000, guid: 00000000000000000000000000000000, type: 0}
   m_AmplitudeGain: 0
   m_FrequencyGain: 0
   mNoiseOffsets: {x: 0, y: 0, z: 0}
