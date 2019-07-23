@@ -40,6 +40,16 @@ For example:
 
 Aaaandd... If you feel so inclined, why not try [Gitmoji] for a bit of :sparkles:
 
+## LICENSE
+
+### Source Code
+
+This work is licensed under the terms of the [MIT license](LICENSE.txt).
+
+### Assets
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
 ## Links
 
 Useful stuff:
